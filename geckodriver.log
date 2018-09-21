@@ -1,0 +1,18 @@
+1483076008837	geckodriver	INFO	Listening on 127.0.0.1:49378
+1483076010842	mozprofile::profile	INFO	Using profile path C:\Users\YUANJU~1\AppData\Local\Temp\rust_mozprofile.grHWkxf0CgGP
+1483076010849	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+1483076010870	geckodriver::marionette	INFO	Connecting to Marionette on localhost:49384
+1483076011546	Marionette	INFO	Listening on port 49384
+[Child 7788] WARNING: pipe error: 232: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 513
+[Child 7788] ###!!! ABORT: Aborting on channel error.: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2056
+[NPAPI 7172] ###!!! ABORT: Aborting on channel error.: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2056
+!! ABORT: Aborting on channel error.: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2056
+r: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+0287819_1477549059436&_=1477549059440, line 1: TypeError: jQuery110206448145260287819_1477549059436 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=sele&json=1&p=3&sid=1469_21421_18240_21109_17001_21406_21377_21190_20928&req=2&csor=4&pwd=sel&cb=jQuery110206448145260287819_1477549059436&_=1477549059441, line 1: TypeError: jQuery110206448145260287819_1477549059436 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=seleniu&json=1&p=3&sid=1469_21421_18240_21109_17001_21406_21377_21190_20928&req=2&csor=7&pwd=seleni&cb=jQuery110206448145260287819_1477549059436&_=1477549059444, line 1: TypeError: jQuery110206448145260287819_1477549059436 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=selenium&json=1&p=3&sid=1469_21421_18240_21109_17001_21406_21377_21190_20928&req=2&csor=8&pwd=seleniu&cb=jQuery110206448145260287819_1477549059436&_=1477549059445, line 1: TypeError: jQuery110206448145260287819_1477549059436 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=seleni&json=1&p=3&sid=1469_21421_18240_21109_17001_21406_21377_21190_20928&req=2&csor=6&pwd=selen&cb=jQuery110206448145260287819_1477549059436&_=1477549059443, line 1: TypeError: jQuery110206448145260287819_1477549059436 is not a function
+[Child 5844] WARNING: pipe error: 232: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 513
+[Child 5844] ###!!! ABORT: Aborting on channel error.: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2052
+r.: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2052

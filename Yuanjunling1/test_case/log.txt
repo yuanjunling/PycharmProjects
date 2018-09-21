@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Python27\Yuanjunling\test_case\Baidu.py", line 10, in <module>
+    class Baidu(unittest.TestCase):
+  File "C:\Python27\Yuanjunling\test_case\Baidu.py", line 34, in Baidu
+    driver.get(self.base_url + "/gaoji/preferences.html")
+NameError: name 'driver' is not defined
+E.
+Time Elapsed: 0:00:10.653000
