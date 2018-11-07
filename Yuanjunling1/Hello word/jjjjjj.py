@@ -1,8 +1,9 @@
 #coding=utf-8
 import requests
 import unittest
-import HTMLTestRunner,time
-import APIBOSS
+from HTMLTestRunner import HTMLTestRunner
+import APIBOSS,time
+
 
 
 testunit = unittest.TestSuite()
@@ -10,10 +11,10 @@ testunit = unittest.TestSuite()
 testunit.addTest(unittest.makeSuite(APIBOSS.ApiBossTest))
 # #定义个报告存放路径，支持相对路径。
 now = time.strftime("%Y-%m-%M-%H_%M_%S", time.localtime(time.time()))
-wwwa ='D:\\apitest.html'+now+'result.html'
+wwwa ='D:\\apitest'+now+'result.html'
 
 fp = file(wwwa,'wb')
-runner = HTMLTestRunner.HTMLTestRunner(
+runner = HTMLTestRunner(
 
     stream=fp,
     title=u"渠道助手测试报告",
@@ -21,6 +22,6 @@ runner = HTMLTestRunner.HTMLTestRunner(
     verbosity=2
 )
 #执行测试用例
-runner = unittest.TextTestRunner()
+# runner = unittest.TextTestRunner()
 runner.run(testunit)
 fp.close()
