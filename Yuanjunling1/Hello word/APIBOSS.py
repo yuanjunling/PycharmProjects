@@ -4,7 +4,6 @@ import re
 import unittest
 import pymysql
 import json
-import HTMLTestRunner
 import random,time,sys
 
 
@@ -44,7 +43,7 @@ class ApiBossTest(unittest.TestCase):
             print ">>>>>>登录成功"
         else:
             print ">>>>>>登录失败"
-
+        self.assertEqual(r.status_code,200) #断言html状态码
     def test_addSuppliers(self):
         global urladd1
         urladd1 = self.urladd
