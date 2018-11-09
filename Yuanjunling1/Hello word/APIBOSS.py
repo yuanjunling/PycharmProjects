@@ -25,6 +25,7 @@ class ApiBossTest(unittest.TestCase):
         a1 = s.get(log_url).content  # 获取页面源码
         lt1 = re.search('name="lt" value="(.*)" />', a1).group(1)  # 查找源码中的lt
         execution1 = re.search('name="execution" value="(.*)" ', a1).group(1)
+
         # 登录BOSS系统
         s.post(log_url, data={'username': 'yuanjunling',
                                 'password': '1234',
@@ -43,6 +44,8 @@ class ApiBossTest(unittest.TestCase):
             print ">>>>>>登录成功"
         else:
             print ">>>>>>登录失败"
+
+
         self.assertEqual(r.status_code,200) #断言html状态码
     def test_addSuppliers(self):
         global urladd1
