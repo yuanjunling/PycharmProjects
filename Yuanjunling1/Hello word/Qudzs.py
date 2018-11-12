@@ -7,34 +7,65 @@ import json
 import random,time,sys
 
 class ApiQudzs(unittest.TestCase):
-    global s
-    s = requests.Session()  # 保持Cookie
+
+
+
     def setUp(self):
         self.log = 'https://login.dev.egtcp.com/cas-server/login?service=https://channel.dev.egtcp.com/cas'#渠道助手端登录网址
         self.url = 'https://channel.dev.egtcp.com/channel/index?messageCount=31&qrcodeUrl=http%3A%2F%2Ft.cn%2FRr6wq9Y&locale=zh_CN'
         self.apilog = 'https://account.dev.egtcp.com/api/user/login'
 
-    def test_log(self):
-        apilog = self.apilog
-        log_url = self.log
+
+
+    def testAddSupplier(self):
+
         url = self.url
-        # a1 = s.get(log_url).content  # 获取页面源码
-        # lt1 = re.search('name="lt" value="(.*)"', a1).group(1)  # 查找源码中的lt
-        # execution1 = re.search('name="execution" value="(.*)"', a1).group(1)
-        # 登录渠道助手系统
-        test_json={'username': 'yuanjlll',
-                  'password': '111111',
-                  'captcha': 'greattao0818',
-                            }
-        s.post(apilog, json=test_json,
-               )  # POST帐号和密码，
-        r = s.get(url)
+        log_test()#登录函数
+        a1 = s.get(url)
+
+
         #断言验证的账号密码验证码
         self.assertEqual(test_json['username'],'yuanjlll')
         self.assertEqual(test_json['password'],'111111')
         self.assertEqual(test_json['captcha'],'greattao0818')
-        self.assertIn(b"https://channel.dev.egtcp.com",r.content)
-        self.assertEqual(r.status_code,200)
+        self.assertIn(b"https://channel.dev.egtcp.com",a1.content)
+        self.assertEqual(a1.status_code,200)
+
+
+    def testAddBuyer(self):
+        log_test()
+        r = s.get("https://channel.dev.egtcp.com/channel/customer/new")
+
+
+
+
+
+def log_test():
+    global s
+    s = requests.Session()  # 保持Cookie
+    global test_json
+    global a
+
+    apilog = 'https://account.dev.egtcp.com/api/user/login'
+    test_json = {'username': 'yuanjlll',
+                 'password': '111111',
+                 'captcha': 'greattao0818',
+                 }
+    s.post(apilog, json=test_json,
+           )  # POST帐号和密码，
+    a = s.post(apilog, json=test_json,
+           )
+    return
+
+
+
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+
 
 
 
