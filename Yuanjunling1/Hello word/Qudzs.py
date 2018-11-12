@@ -53,8 +53,7 @@ def log_test():
                  }
     s.post(apilog, json=test_json,
            )  # POST帐号和密码，
-    a = s.post(apilog, json=test_json,
-           )
+
     return
 
 
