@@ -4,7 +4,7 @@ import re
 import unittest
 import pymysql
 import json
-import random,time,sys
+import random,time,sys,string
 
 class ApiQudzs(unittest.TestCase):
     def setUp(self):
@@ -29,9 +29,11 @@ class ApiQudzs(unittest.TestCase):
         Suppliername1 = u'供应商测试数据%d'%random.randrange(1, 9999,)
         Suppliername = {'customerName':Suppliername1,'role':'2'}
         add = s.post("https://channel.dev.egtcp.com/channel/customer/checkname",data=Suppliername)
+        #随机生成字符串
+        random1 =''.join(random.sample(string.ascii_letters + string.digits, 50))
         #供应商数据
         Supplier = {
-            'address':u'地址',
+            'address':random1,
             'company':Suppliername1,
             'contactEmail':' @qq.com',
             'contactMobileNumber':random.choice(['139','188','185','136','158','151'])+"".join(random.choice("0123456789") for i in range(8)),
