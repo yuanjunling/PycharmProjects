@@ -7,15 +7,10 @@ import json
 import random,time,sys
 
 class ApiQudzs(unittest.TestCase):
-
-
-
     def setUp(self):
         self.log = 'https://login.dev.egtcp.com/cas-server/login?service=https://channel.dev.egtcp.com/cas'#渠道助手端登录网址
         self.url = 'https://channel.dev.egtcp.com/channel/index?messageCount=31&qrcodeUrl=http%3A%2F%2Ft.cn%2FRr6wq9Y&locale=zh_CN'
         self.apilog = 'https://account.dev.egtcp.com/api/user/login'
-
-
 
     def testAddSupplier(self):
 
@@ -38,7 +33,7 @@ class ApiQudzs(unittest.TestCase):
         Supplier = {
             'address':u'地址',
             'company':Suppliername1,
-            'contactEmail':'261412489@qq.com',
+            'contactEmail':' @qq.com',
             'contactMobileNumber':random.choice(['139','188','185','136','158','151'])+"".join(random.choice("0123456789") for i in range(8)),
             'contactName':random.choice( [u"奥特曼", u"舞法美少女", u"关公",u"张飞", u"奥黛丽赫本",u"朱茵"]),
             'customerName':Suppliername1,
@@ -57,8 +52,6 @@ class ApiQudzs(unittest.TestCase):
         #添加供应商
         s.post("https://channel.dev.egtcp.com/channel/customer",data=Supplier)
         self.assertEqual(Supplier['customerName'],Suppliername1)
-
-
 
 
     def testAddBuyer(self):
@@ -85,6 +78,29 @@ def log_test():
 
     return
 
+def test_sql(sql, args=None):
+    # 建立数据库连接
+
+    conn = pymysql.connect(
+        host='192.168.2.203',  # 远程主机的ip地址
+        user='gt_user',  # 数据库用户名
+        db='gttown_crm',  # 表名
+        passwd='greatTao1314!@#$',  # 数据库密码
+        port=3306,
+        charset="utf8"
+    )
+    # 创建游标
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    # 执行sql
+    cursor.execute(sql, [args])
+    results = cursor.fetchall()
+    # 提交，不然无法保存新建或者修改的数据
+    conn.commit()
+    # 关闭游标
+    cursor.close()
+    # 关闭连接
+    conn.close()
+    return results
 
 
 
