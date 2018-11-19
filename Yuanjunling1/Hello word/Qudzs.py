@@ -66,6 +66,27 @@ class ApiQudzs(unittest.TestCase):
         # print resultObj
 
         s.get("https://channel.dev.egtcp.com/channel/mycustomer/detail/manager?customerid=%d"%resultObj[0]['id'])
+        #完善客户资料信息
+        company={
+            'address':random1,
+            'breach':'0',
+            'channelCustomerAttachments[0].title':u'企业照片',
+            'channelCustomerAttachments[0].uri': 'https://image-dev.egtcp.com/2018/11/19/33b80296c9e8cee4be6b1aef11739966.png',
+            'city': '330500',
+            'company': Suppliername1,
+            'companyContent': u'企业简介',
+            'companyEn':'supplier Test Data%d'%random.randrange(1, 9999,),
+            'customerRequirements': '8',
+            'district': '330523',
+            'employeesTotal': '1',
+            'enterpriseType': '1',
+            'requirementRemark': u'客户备注',
+            'setUpTime': '2018',
+            'type': '16',
+        }
+        #完善客户资料
+        s.post("https://channel.dev.egtcp.com/channel/mycustomer/detail/manager/save?customerId=%d"%resultObj[0]['id'],data=company)
+
 
 
 
