@@ -1,4 +1,5 @@
 #coding=utf-8
+import re
 # class Employee:
 #     '所以员工的基类'
 #     empCount = 0
@@ -45,7 +46,8 @@
 
 
 class Parent:  # 定义父类
-    parentAttr = 0
+    parentAttr = 100
+
 
     def __init__(self):
         print "调用父类构造函数"
@@ -53,8 +55,9 @@ class Parent:  # 定义父类
     def parentMethod(self):
         print '调用父类方法'
 
-    def setAttr(self, attr):
+    def setAttr(self, attr,):
         Parent.parentAttr = attr
+
 
     def getAttr(self):
         print "父类属性 :", Parent.parentAttr
@@ -66,6 +69,9 @@ class Child(Parent):  # 定义子类
 
     def childMethod(self):
         print '调用子类方法'
+    def parentMethod(self):
+        print '重构父类方法'
+
 
 
 c = Child()          # 实例化子类
@@ -73,3 +79,12 @@ c.childMethod()      # 调用子类的方法
 c.parentMethod()     # 调用父类方法
 c.setAttr(300)       # 再次调用父类的方法 - 设置属性值
 c.getAttr()          # 再次调用父类的方法 - 获取属性值
+
+line = "Cats are smarter than dogs"
+matchObj = re.match( r'(.*) are (.*) .*', line, re.M|re.I)
+if matchObj:
+   print "matchObj.group() : ", matchObj.group()
+   print "matchObj.group(1) : ", matchObj.group(1)
+   print "matchObj.group(2) : ", matchObj.group(2)
+else:
+   print "No match!!"
