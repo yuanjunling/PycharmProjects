@@ -9,11 +9,31 @@ s = requests.Session()#保持Cookie
 #测试数据
 random1 =''.join(random.sample(string.ascii_letters + string.digits, 50))#随机生成字符串
 Suppliername1 = u'供应商测试数据%d'%random.randrange(1, 9999,)
+#邮箱方法
+def RandomEmail( emailType=None, rang=None):
+    __emailtype = ["@qq.com", "@163.com", "@126.com", "@189.com"]
+    # 如果没有指定邮箱类型，默认在 __emailtype中随机一个
+    if emailType == None:
+        __randomEmail = random.choice(__emailtype)
+    else:
+        __randomEmail = emailType
+    # 如果没有指定邮箱长度，默认在4-10之间随机
+    if rang == None:
+        __rang = random.randint(4, 10)
+    else:
+        __rang = int(rang)
+    __Number = "0123456789qbcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPWRSTUVWXYZ"
+    __randomNumber = "".join(random.choice(__Number) for i in range(__rang))
+    _email = __randomNumber + __randomEmail
+    return _email
+
+
+RandomEmail=RandomEmail()#调用随机产生Email函数
 Supplier = {
 
             'address':random1,
             'company':Suppliername1,
-            'contactEmail':' @qq.com',
+            'contactEmail':RandomEmail,
             'contactMobileNumber':random.choice(['139','188','185','136','158','151'])+"".join(random.choice("0123456789") for i in range(8)),
             'contactName':random.choice( [u"奥特曼", u"舞法美少女", u"关公",u"张飞", u"奥黛丽赫本",u"朱茵"]),
             'customerName':Suppliername1,
@@ -88,25 +108,14 @@ class ApiQudzs(unittest.TestCase):
         s.post("https://channel.dev.egtcp.com/channel/mycustomer/detail/manager/save?customerId=%d"%resultObj[0]['id'],data=company)
 
 
-
-
-
     def testAddBuyer(self):
         log_test()
         s.get("https://channel.dev.egtcp.com/channel/customer/new")
 
-
-
-
-
-
 def log_test():
     # global s
     # s = requests.Session()
-
     global test_json
-
-
     apilog = 'https://account.dev.egtcp.com/api/user/login'
     test_json = {'username': 'yuanjlll',
                  'password': '111111',
@@ -115,7 +124,7 @@ def log_test():
     s.post(apilog, json=test_json,
            )  # POST帐号和密码，
 
-    return
+    return;
 
 def test_sql(sql, args=None):
     # 建立数据库连接
@@ -139,7 +148,7 @@ def test_sql(sql, args=None):
     cursor.close()
     # 关闭连接
     conn.close()
-    return results
+    return results;
 
 
 
