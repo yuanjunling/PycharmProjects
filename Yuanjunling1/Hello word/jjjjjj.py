@@ -2,14 +2,15 @@
 import requests
 import unittest
 from HTMLTestRunner import HTMLTestRunner
-import APIBOSS,time,Qudzs
+import APIBOSS,time,Qudzs,Equipment
 
 
 
 testunit = unittest.TestSuite()
 #将测试用例加入到测试套件中
-testunit.addTest(unittest.makeSuite(APIBOSS.ApiBossTest))
-testunit.addTest(unittest.makeSuite(Qudzs.ApiQudzs))
+# testunit.addTest(unittest.makeSuite(APIBOSS.ApiBossTest))
+# testunit.addTest(unittest.makeSuite(Qudzs.ApiQudzs))
+testunit.addTest(unittest.makeSuite(Equipment.Boss))
 # #定义个报告存放路径，支持相对路径。
 now = time.strftime("%Y-%m-%M-%H_%M_%S", time.localtime(time.time()))
 wwwa ='D:\\apitest'+now+'result.html'
