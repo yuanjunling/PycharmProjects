@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 
 def adduser(driver):
+    u'''添加用户'''
     driver.switch_to.default_content()
     driver.switch_to_frame(1)
     time.sleep(2)
@@ -42,7 +43,6 @@ def adduser(driver):
     driver.switch_to_frame(1)
     time.sleep(2)
     driver.find_element_by_xpath("html/body/div[17]/div[3]/a/span/span").click()
-
     return
 
 
@@ -60,6 +60,7 @@ class Boss(unittest.TestCase):
         driver.get(self.Boss_url)
         driver.maximize_window()
         driver.implicitly_wait(30)
+        u'''登录'''
         driver.find_element_by_xpath(".//*[@id='loginForm']/div[3]/span/input[1]").send_keys("admin")
         driver.find_element_by_xpath(".//*[@id='loginForm']/div[4]/span/input[1]").send_keys("123456")
         driver.find_element_by_xpath(".//*[@id='loginForm']/div[4]/span/input[1]").send_keys(Keys.ENTER)
@@ -71,14 +72,17 @@ class Boss(unittest.TestCase):
         driver.find_element_by_xpath(".//*[@id='AAB0000']/span/span[1]").click()
         time.sleep(2)
 
-        n = 5
+        n = 3
         sum = 0
         counter = 1
-
+    try:
         while counter <= n:
             sum = sum + counter
             counter += 1
             adduser(driver)
+    except:
+        now = time.strftime("%Y-%m-%M-%H_%M_%S", time.localtime(time.time()))
+        driver.get_screenshot_as_file(u"E:\\test\log\\" + now + "error_png.png")
 
     def is_element_present(self, how, what):
         try:
