@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 def adduser(driver):
     u'''添加用户'''
     driver.switch_to.default_content()
-    driver.switch_to_fram(1)
+    driver.switch_to_frame(1)
     WebDriverWait(driver, 10).until(lambda x: x.find_element_by_xpath(".//*[@id='addUser']/span/span[1]")).click()
     time.sleep(1)
     driver.switch_to_frame("paramIframe")
@@ -50,20 +50,16 @@ class Boss(unittest.TestCase):
         self.Boss_url = "http://123.206.174.21:8080/RepairServiceManage_mvn-0.0.1-SNAPSHOT"
         self.verificationErrors=[]
         self.accept_next_alet=True
-
     def test_login(self):
         driver = self.driver
         driver.get(self.Boss_url)
         driver.maximize_window()
         driver.implicitly_wait(30)
-
         u'''登录系统'''
-
         driver.find_element_by_xpath(".//*[@id='loginForm']/div[3]/span/input[1]").send_keys("admin")
         driver.find_element_by_xpath(".//*[@id='loginForm']/div[4]/span/input[1]").send_keys("000000")
         driver.find_element_by_xpath(".//*[@id='loginForm']/div[4]/span/input[1]").send_keys(Keys.ENTER)
-
-        time.sleep(1)
+        time.sleep(2)
         driver.switch_to_alert().accept()
         # 等待时长10秒，默认0.5秒询问一次
         WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath(".//*[@id='A']/span/span[1]")).click()
@@ -103,7 +99,6 @@ class Boss(unittest.TestCase):
         driver.find_element_by_xpath(".//html/body/ div[20] /div[3]/a").click()
         time.sleep(1)
         driver.find_element_by_xpath("/html/body/div[17]/div[3]/a").click()
-
     def is_element_present(self, how, what):
         try:
             self.driver.find_element(by=how, value=what)
