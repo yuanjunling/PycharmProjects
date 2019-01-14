@@ -7,10 +7,31 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 
+# def RandomEmail( emailType=None, rang=None):
+#     __emailtype = ["@qq.com", "@163.com", "@126.com", "@189.com"]
+#     # 如果没有指定邮箱类型，默认在 __emailtype中随机一个
+#     if emailType == None:
+#         __randomEmail = random.choice(__emailtype)
+#     else:
+#         __randomEmail = emailType
+#     # 如果没有指定邮箱长度，默认在4-10之间随机
+#     if rang == None:
+#         __rang = random.randint(4, 10)
+#     else:
+#         __rang = int(rang)
+#     __Number = "0123456789qbcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPWRSTUVWXYZ"
+#     __randomNumber = "".join(random.choice(__Number) for i in range(__rang))
+#     _email = __randomNumber + __randomEmail
+#     return _email
+# RandomEmail1 = RandomEmail()
+
+def Cdifrom(driver,int=None):
+    driver.switch_to.default_content()
+    driver.switch_to_frame(int)
+
 def adduser(driver):
     u'''添加用户'''
-    driver.switch_to.default_content()
-    driver.switch_to_frame(1)
+    Cdifrom(driver, 1)
     WebDriverWait(driver, 10).until(lambda x: x.find_element_by_xpath(".//*[@id='addUser']/span/span[1]")).click()
     time.sleep(1)
     driver.switch_to_frame("paramIframe")
@@ -22,8 +43,7 @@ def adduser(driver):
             random.choice("0123456789") for i in range(8)))
     WebDriverWait(driver, 10).until(
         lambda x: x.find_element_by_xpath(".//*[@id='paramForm']/div[3]/span/input[1]")).send_keys(
-         random.choice(['139', '188', '185', '136', '158', '151']) + "".join(
-             random.choice("0123456789") for i in range(8)) + "@qq.com")
+        random.choice(['139','188','185','136','158','151'])+"".join(random.choice("0123456789") for i in range(8))+"@qq.com")
     WebDriverWait(driver, 10).until(lambda x: x.find_element_by_xpath(".//*[@id='orgIdDiv']/span/span/a")).click()
     WebDriverWait(driver, 10).until(lambda x: x.find_element_by_xpath("//div[starts-with(@id,'_easyui_tree_')]")).click()
     WebDriverWait(driver, 10).until(
@@ -63,18 +83,17 @@ class Boss(unittest.TestCase):
         driver.switch_to_alert().accept()
         # 等待时长10秒，默认0.5秒询问一次
         WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath(".//*[@id='A']/span/span[1]")).click()
-        WebDriverWait(driver, 10).until(lambda x: x.find_element_by_xpath(".//*[@id='AAB0000']/span/span[1]")).click()
-        u'''循环添加行内用户'''
-        n = 2
-        sum = 0
-        counter = 1
-        while counter <= n:
-            sum = sum + counter
-            counter += 1
-            adduser(driver)
+        WebDriverWait(driver, 10).until(lambda x:x.find_element_by_xpath(".//*[@id='AAB0000']/span/span[1]")).click()
+        # u'''循环添加行内用户'''
+        # n = 2
+        # sum = 0
+        # counter = 1
+        # while counter <= n:
+        #     sum = sum + counter
+        #     counter += 1
+        #     adduser(driver)
         u'''修改行内用户'''
-        driver.switch_to.default_content()
-        driver.switch_to_frame(1)
+        Cdifrom(driver, 1)
         time.sleep(2)
         user1 = driver.find_element_by_xpath(".//div/div[1]/div[2]/div[2]/table/tbody/tr[1]/td[2]").text
         WebDriverWait(driver, 10).until(
@@ -94,11 +113,36 @@ class Boss(unittest.TestCase):
         time.sleep(0.5)
         driver.find_element_by_xpath("html/body/div[1]/div[2]/div[1]/a[1]/span/span[2]").click()
         time.sleep(1)
-        driver.switch_to.default_content()
-        driver.switch_to_frame(1)
+        Cdifrom(driver, 1)
+        # driver.switch_to.default_content()
+        # driver.switch_to_frame(1)
         driver.find_element_by_xpath(".//html/body/ div[20] /div[3]/a").click()
+        WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath("/html/body/div[17]/div[3]/a")).click()
+        driver.find_element_by_xpath(".//*[@id='cleanForm']/span").click()
+        driver.find_element_by_xpath("html/body/div[1]/div/div[2]/a[13]/span/span[1]").click()
+        WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath(".//*[@id='menu_A']/div[2]/div[1]/div[3]/a[2]")).click()
+        WebDriverWait(driver,10).until(lambda x:x.find_element_by_id("ABA0000")).click()
+        Cdifrom(driver,1)
+        driver.find_element_by_id("addRole").click()
         time.sleep(1)
-        driver.find_element_by_xpath("/html/body/div[17]/div[3]/a").click()
+        driver.switch_to_frame("paramIframe")
+        WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath(".//*[@id='paramForm']/div[1]/span/input[1]")).send_keys(u"角色测试数据%d" % random.randrange(1, 9999, ))
+        driver.find_element_by_xpath(".//*[@id='paramForm']/div[2]/span/span/a").click()
+        driver.find_element_by_id("_easyui_combobox_i2_1").click()
+        driver.find_element_by_xpath(".//*[@id='paramForm']/div[3]/span/input[1]").send_keys(U"角色描述")
+        driver.find_element_by_xpath("html/body/div[1]/div[2]/div[1]/a[2]/span/span[1]").click()
+        Cdifrom(driver,1)
+        WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath("html/body/div[9]/div[3]/a/span/span")).click()
+
+
+
+
+
+
+
+
+
+
     def is_element_present(self, how, what):
         try:
             self.driver.find_element(by=how, value=what)
