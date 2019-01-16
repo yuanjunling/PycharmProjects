@@ -7,24 +7,6 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 
-# def RandomEmail( emailType=None, rang=None):
-#     __emailtype = ["@qq.com", "@163.com", "@126.com", "@189.com"]
-#     # 如果没有指定邮箱类型，默认在 __emailtype中随机一个
-#     if emailType == None:
-#         __randomEmail = random.choice(__emailtype)
-#     else:
-#         __randomEmail = emailType
-#     # 如果没有指定邮箱长度，默认在4-10之间随机
-#     if rang == None:
-#         __rang = random.randint(4, 10)
-#     else:
-#         __rang = int(rang)
-#     __Number = "0123456789qbcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPWRSTUVWXYZ"
-#     __randomNumber = "".join(random.choice(__Number) for i in range(__rang))
-#     _email = __randomNumber + __randomEmail
-#     return _email
-# RandomEmail1 = RandomEmail()
-
 def Cdifrom(driver,int=None):
     driver.switch_to.default_content()
     driver.switch_to_frame(int)
@@ -84,14 +66,14 @@ class Boss(unittest.TestCase):
         # 等待时长10秒，默认0.5秒询问一次
         WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath(".//*[@id='A']/span/span[1]")).click()
         WebDriverWait(driver, 10).until(lambda x:x.find_element_by_xpath(".//*[@id='AAB0000']/span/span[1]")).click()
-        # u'''循环添加行内用户'''
-        # n = 2
-        # sum = 0
-        # counter = 1
-        # while counter <= n:
-        #     sum = sum + counter
-        #     counter += 1
-        #     adduser(driver)
+        u'''循环添加行内用户'''
+        n = 2
+        sum = 0
+        counter = 1
+        while counter <= n:
+            sum = sum + counter
+            counter += 1
+            adduser(driver)
         u'''修改行内用户'''
         Cdifrom(driver, 1)
         time.sleep(2)
@@ -114,8 +96,6 @@ class Boss(unittest.TestCase):
         driver.find_element_by_xpath("html/body/div[1]/div[2]/div[1]/a[1]/span/span[2]").click()
         time.sleep(1)
         Cdifrom(driver, 1)
-        # driver.switch_to.default_content()
-        # driver.switch_to_frame(1)
         driver.find_element_by_xpath(".//html/body/ div[20] /div[3]/a").click()
         WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath("/html/body/div[17]/div[3]/a")).click()
         driver.find_element_by_xpath(".//*[@id='cleanForm']/span").click()
@@ -125,22 +105,33 @@ class Boss(unittest.TestCase):
         Cdifrom(driver,1)
         driver.find_element_by_id("addRole").click()
         time.sleep(1)
+        u'''角色系统'''
         driver.switch_to_frame("paramIframe")
-        WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath(".//*[@id='paramForm']/div[1]/span/input[1]")).send_keys(u"角色测试数据%d" % random.randrange(1, 9999, ))
+        user2 = u"角色测试数据%d" % random.randrange(1, 9999, )
+        WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath(".//*[@id='paramForm']/div[1]/span/input[1]")).send_keys(user2)
         driver.find_element_by_xpath(".//*[@id='paramForm']/div[2]/span/span/a").click()
         driver.find_element_by_id("_easyui_combobox_i2_1").click()
         driver.find_element_by_xpath(".//*[@id='paramForm']/div[3]/span/input[1]").send_keys(U"角色描述")
         driver.find_element_by_xpath("html/body/div[1]/div[2]/div[1]/a[2]/span/span[1]").click()
         Cdifrom(driver,1)
-        WebDriverWait(driver,10).until(lambda x:x.find_element_by_xpath("html/body/div[9]/div[3]/a/span/span")).click()
-
-
-
-
-
-
-
-
+       #系统断言
+        error_mes = driver.find_element_by_xpath("html/body/div[9]/div[2]/div[2]").text
+        try:
+            assert error_mes == u"新增角色信息成功！"
+            print ("Test pass")
+        except Exception as e:
+            print ("Test fail".format(e))
+        WebDriverWait(driver,10).until(
+            lambda x:x.find_element_by_xpath("html/body/div[9]/div[3]/a/span/span")).click()
+        WebDriverWait(driver, 10).until(
+            lambda x: x.find_element_by_xpath(".//*[@id='paramForm']/div[1]/span/input[1]")).send_keys(user2)
+        driver.find_element_by_xpath(".//*[@id='searchRole']/span/span[1]").click()
+        time.sleep(0.5)
+        driver.find_element_by_xpath(".//div/div[1]/div[2]/div[2]/table/tbody/tr[1]/td[1]").click()
+        driver.find_element_by_xpath(".//*[@id='getRole']/span/span[1]").click()
+        driver.switch_to_frame("paramIframe")
+        time.sleep(0.5)
+        driver.find_element_by_xpath("html/body/div[1]/div[2]/div[1]/a/span/span[1]").click()
 
 
     def is_element_present(self, how, what):
@@ -155,7 +146,8 @@ if __name__ == "__main__":
     runner = HTMLTestRunner.HTMLTestRunner(
         stream=fp,
         title=u"设备报修系统",
-        description=u"用例执行情况："
+        description=u"用例执行情况：",
+        verbosity = 2
     )
 
 
