@@ -1,18 +1,35 @@
-from pyquery import PyQuery as pq
-html = '''
-<div id="container">
-    <ul class="list">
-         <li class="item-0">first item</li>
-         <li class="item-1"><a href="link2.html">second item</a></li>
-         <li class="item-0 active"><a href="link3.html"><span class="bold">third item</span></a></li>
-         <li class="item-1 active"><a href="link4.html">fourth item</a></li>
-         <li class="item-0"><a href="link5.html">fifth item</a></li>
-     </ul>
-</div>
-'''
+#coding=utf-8
+from selenium import webdriver
+from random import choice
+import time,unittest,random,HTMLParser,hashlib
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
 
-from pyquery import PyQuery as pq
-doc = pq(html)
-#print(doc)
-#print(type(doc))
-print(doc('#container .list li'))
+class LIB(unittest.TestCase):
+    def setUp(self):
+        u"""登录"""
+        self.driver = webdriver.Chrome()
+        self.driver.implicitly_wait(30)
+        self.Boss_url = "http://192.168.0.254:8080/inspectpass_platform/login.jsp"
+        self.verificationErrors = []
+        self.accept_next_alet = True
+    def test_login(self):
+        driver = self.driver
+        driver.get(self.Boss_url)
+        driver.maximize_window()
+        driver.implicitly_wait(30)
+        u'''登录系统'''
+        driver.find_element_by_id("loginName").send_keys("admin")
+        driver.find_element_by_id("loginPwd").send_keys("123456")
+        driver.find_element_by_id("loginPwd").send_keys(Keys.ENTER)
+        time.sleep(1)
+        u"""业务管理"""
+        driver.find_element_by_xpath("html/body/div[1]").click()
+        driver.find_element_by_xpath(".//*[@id='nav']/li[1]/a/cite").click()
+        time.sleep(0.5)
+        driver.find_element_by_xpath(".//*[@id='nav']/li[1]/ul/li[2]/a/cite").click()
+
+
+
