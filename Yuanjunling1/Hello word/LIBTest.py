@@ -62,6 +62,7 @@ class DpAppTests(unittest.TestCase):
         #     addcheckout(driver)
         for i in range(3):
             addcheckout(driver)
+            print u"添加成功"
 
 
 
