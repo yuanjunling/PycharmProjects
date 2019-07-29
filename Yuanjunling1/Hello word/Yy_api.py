@@ -37,19 +37,24 @@ class Apiyy(unittest.TestCase):
         url = self.GetMyInspectionList
         headers = { "Authorization": Data["Data"]}
         payload = {"Page":"1","Num":"10","Key":"清洁","Type":"1"}
-        r1 = requests.get(url,headers=headers,params=payload).json()
+        r1 = requests.get(url,headers=headers,params=payload,timeout=None).json()
         json.dumps(r1,ensure_ascii=False)
         self.assertEqual(r1["Msg"], u"获取成功")
+
     def test_d_AddInspection(self):#添加扣分项
         url = self.AddInspection
         headers = {"Content-Type": "application/json","Authorization": Data["Data"],"accept":"*/*"}
         global random1
-        random1 = ''.join(random.sample(string.ascii_letters + string.digits, 50))  # 随机生成字符串
-        json_test = {"DMBGuid":"3fjEAi4SLuM","ISSGuid":"3ejiuxPPjwm","ISContent":random1}
-        r1 = requests.post(url,json=json_test,headers=headers).json()
+        random1 = ''.join(random.sample(string.ascii_letters + string.digits, 60))  # 随机生成字符串
+        json_test01 = {
+            "DMBGuid": "3fjEAi4SLuM", "ISSGuid": "3ejiwwbDw3u", "ISContent": random1, "DisGuid": "", "DisName": "",
+            "ISPicture1": "1361361360215638611837522.png", "ISPicture3": None,
+            "ISPicture2": "1361361360215638611838023.png",
+            "ISVoice": "", "ISVoiceTime": ""
+        }
+        r1 = requests.post(url,json=json_test01,headers=headers).json()
         json.dumps(r1, ensure_ascii=False)
         self.assertEqual(r1["Msg"], u"操作成功")
 
 if __name__ == '__main__':
     unittest.main()
-
