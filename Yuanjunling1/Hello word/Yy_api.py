@@ -56,5 +56,6 @@ class Apiyy(unittest.TestCase):
         json.dumps(r1, ensure_ascii=False)
         self.assertEqual(r1["Msg"], u"操作成功")
 
+
 if __name__ == '__main__':
     unittest.main()
